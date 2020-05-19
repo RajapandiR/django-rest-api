@@ -7,5 +7,6 @@ router.register('Hello-viewset', views.HelloViewSet, basename='Hello-viewset')
 router.register('stud', views.StudViewSet)
 urlpatterns = [
 	path('Hello-view/', views.HelloApiView.as_view()),
-	path('', include(router.urls))
+	path('login/', views.UserLoginView.as_view()),
+	path('', include(router.urls)),
 ]
