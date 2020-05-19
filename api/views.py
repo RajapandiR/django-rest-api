@@ -3,7 +3,11 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
+
 from api import serializers
+from api import models
+from api import permissions
 
 # Create your views here.
 
@@ -60,9 +64,16 @@ class HelloViewSet(viewsets.ViewSet):
 
 	def retrieve(self, request, pk=None):
 		return Response({'HTTP-Method': 'GET'})
-		
+
 	def update(self, request, pk=None):
 		return Response({'HTTP-Method': 'PUT'})
 
 	def destroy(self, request, pk=None):
 		return Response({'HTTP-Method': 'DELETE'})
+
+class StudViewSet(viewsets.ModelViewSet):
+	serializer_class = serializers.StudSerializers
+	queryset = models.Stud.objects.all()
+	authentication_classes = (TokenAuthentication,)
+	permission_classes = (permissions.UpdateOwnStud,)
+ 
