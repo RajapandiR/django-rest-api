@@ -24,3 +24,11 @@ class StudSerializers(serializers.ModelSerializer):
 			email = validated_data['email'],
 			password = validated_data['password'],)
 		return user
+
+class StudProfileSerializers(serializers.ModelSerializer):
+	class Meta:
+		model = models.StudProfile
+		fields = ['id', 'user_profile', 'status_text']
+		extra_kwargs = {
+			'user_profile': {'read_only': True}
+		}
